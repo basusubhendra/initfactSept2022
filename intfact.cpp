@@ -10,6 +10,8 @@ int main(int argc, char* argv[]) {
 	Modulator* mod2 = new Modulator(num, adp->getBinary(), 1);
 	std::string _factor1_ = "";
 	std::string _factor2_ = "";
+	unsigned long long int accumulator1 = 0;
+	unsigned long long int accumulator2 = 0;
 	while (1) {
 		mod1->run_micro_step();
 		mod2->run_micro_step();
@@ -18,8 +20,8 @@ int main(int argc, char* argv[]) {
 		unsigned long long snippet1_size = snippet1.size();
 		unsigned long long snippet2_size = snippet2.size();
 		if (snippet1_size > 0 && snippet1_size == snippet2_size) {
-			short int polarity1 = determine_polarity(snippet1_size);
-			short int polarity2 = determine_polarity(snippet2_size);
+			short int polarity1 = determine_polarity(accumulator1);
+			short int polarity2 = determine_polarity(accumulator2);
 			if (polarity1 == 0) {
 				_factor1_ += "0";
 			} else if (polarity1 == 1) {
@@ -30,6 +32,11 @@ int main(int argc, char* argv[]) {
 			} else if (polarity2 == 1) {
 				_factor2_ += "1";
 			}
+			accumulator1 = 0;
+			accumulator2 = 0;
+		} else {
+			accumulator1 += snippet1_size;
+			accumulator2 += snippet2_size;
 		}
 		//if product of _factor1_ and _factor2_ is num
 		//then exit
