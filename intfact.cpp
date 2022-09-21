@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 		std::string snippet2 = mod2->getSnippet();
 		unsigned long long snippet1_size = snippet1.size();
 		unsigned long long snippet2_size = snippet2.size();
-		if (snippet1_size == snippet2_size) {
+		if (snippet1_size > 0 && snippet1_size == snippet2_size) {
 			short int polarity1 = determine_polarity(snippet1_size);
 			short int polarity2 = determine_polarity(snippet2_size);
 			if (polarity1 == 0) {
