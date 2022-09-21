@@ -11,7 +11,7 @@
 #include <gmp.h>
 using namespace std;
 using namespace boost;
-enum state_relation { _equal_, _lt_, _gt_, _nan_1_, _nan_2_ };
+enum state_relation { _equal_, _lt_, _gt_, _nan_1_, _nan_2_, _nan_3_ };
 enum state_relation _deriveStateRelation_(short int x, short int y) {
 	if (x == 0) {
 		return _nan_1_;
@@ -24,6 +24,7 @@ enum state_relation _deriveStateRelation_(short int x, short int y) {
 	} else if (x > y) {
 		return _gt_;
 	}
+	return _nan_3_;
 }
 
 short int _getStateRelation_(enum state_relation relation) {
@@ -100,5 +101,14 @@ std::string _int_(std::string __b) {
 	mpz_clear(sum);
 	mpz_clear(term);
 	return _res_;
+}
+
+short int determine_polarity(unsigned long long int x) {
+	if (x == 0) {
+		return -1;
+	} else {
+		return x % 2;
+	}
+	return -1;
 }
 #endif

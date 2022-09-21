@@ -15,8 +15,22 @@ int main(int argc, char* argv[]) {
 		mod2->run_micro_step();
 		std::string snippet1 = mod1->getSnippet();
 		std::string snippet2 = mod2->getSnippet();
-		_factor1_ += snippet1;
-		_factor2_ += snippet2;
+		unsigned long long snippet1_size = snippet1.size();
+		unsigned long long snippet2_size = snippet2.size();
+		if (snippet1_size == snippet2_size) {
+			short int polarity1 = determine_polarity(snippet1_size);
+			short int polarity2 = determine_polarity(snippet2_size);
+			if (polarity1 == 0) {
+				_factor1_ += "0";
+			} else if (polarity1 == 1) {
+				_factor1_ += "1";
+			}
+			if (polarity2 == 0) {
+				_factor2_ += "0";
+			} else if (polarity2 == 1) {
+				_factor2_ += "1";
+			}
+		}
 		//if product of _factor1_ and _factor2_ is num
 		//then exit
 	}
