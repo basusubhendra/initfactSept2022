@@ -34,6 +34,9 @@ int main(int argc, char* argv[]) {
 			}
 			accumulator1 = 0;
 			accumulator2 = 0;
+			cout << _factor1_ << endl;
+			cout << _factor2_ << endl;
+			system("a=1;read a");
 		} else {
 			accumulator1 += snippet1_size;
 			accumulator2 += snippet2_size;
