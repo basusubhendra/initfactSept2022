@@ -15,9 +15,11 @@ int main(int argc, char* argv[]) {
 	while (1) {
 		mod1->run_micro_step();
 		mod2->run_micro_step();
-		std::string snippet1 = mod1->getSnippet();
-		std::string snippet2 = mod2->getSnippet();
-		if (snippet1.size() == snippet2.size()) {
+		char* snippet1 = mod1->getSnippet();
+		char* snippet2 = mod2->getSnippet();
+		unsigned int sz1 = strlen(snippet1);
+		unsigned int sz2 = strlen(snippet2);
+		if (sz1 == sz2) {
 			int polarity1 = determine_polarity(accumulator1);
 			int polarity2 = determine_polarity(accumulator2);
 			if (accumulator1 > 0) {
@@ -27,9 +29,11 @@ int main(int argc, char* argv[]) {
 				_factor2_ += boost::lexical_cast<std::string>(polarity2);
 			}
 			accumulator1 = accumulator2 = 0;
+			accumulator1 += sz1;
+			accumulator2 += sz2;
 		} else {
-			accumulator1 += snippet1.size();
-			accumulator2 += snippet2.size();
+			accumulator1 += sz1;
+			accumulator2 += sz2;
 		}
 	}
 	std::string factor1_in_decimal = _int_(_factor1_);

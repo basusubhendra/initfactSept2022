@@ -7,7 +7,7 @@ class Modulator {
 		char* num;
 		long long int l;
 		std::string binary_string1;
-		std::string snippet;
+		char* snippet;
 		short int parity;
 		long long int offset;
 		FILE* fp;
@@ -18,7 +18,7 @@ class Modulator {
 	public:
 		Modulator(char*, std::string, short int);
 		void run_micro_step();
-		std::string getSnippet();
+		char* getSnippet();
 		~Modulator();
 };
 
@@ -69,11 +69,11 @@ void Modulator::run_micro_step() {
 			_factor_ += "X";
 		}
 	}
-	this->snippet = _factor_;
+	this->snippet = strdup(_factor_.c_str());
 	return;
 }
 
-std::string Modulator::getSnippet() {
+char* Modulator::getSnippet() {
 	return this->snippet;
 }
 
