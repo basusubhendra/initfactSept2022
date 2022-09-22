@@ -17,9 +17,9 @@ int main(int argc, char* argv[]) {
 		mod2->run_micro_step();
 		char* snippet1 = mod1->getSnippet();
 		char* snippet2 = mod2->getSnippet();
-		unsigned int sz1 = strlen(snippet1);
+		unsigned int sz1 = strlen(snippet1); 
 		unsigned int sz2 = strlen(snippet2);
-		if (sz1 == sz2) {
+		if ((sz1 % 100) == (sz2 % 100)) {
 			int polarity1 = determine_polarity(accumulator1);
 			int polarity2 = determine_polarity(accumulator2);
 			if (accumulator1 > 0) {
