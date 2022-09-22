@@ -17,32 +17,20 @@ int main(int argc, char* argv[]) {
 		mod2->run_micro_step();
 		std::string snippet1 = mod1->getSnippet();
 		std::string snippet2 = mod2->getSnippet();
-		unsigned long long snippet1_size = snippet1.size();
-		unsigned long long snippet2_size = snippet2.size();
-		if (snippet1_size > 0 && snippet1_size == snippet2_size) {
-			short int polarity1 = determine_polarity(accumulator1);
-			short int polarity2 = determine_polarity(accumulator2);
-			if (polarity1 == 0) {
-				_factor1_ += "0";
-			} else if (polarity1 == 1) {
-				_factor1_ += "1";
+		if (snippet1.size() == snippet2.size()) {
+			int polarity1 = determine_polarity(accumulator1);
+			int polarity2 = determine_polarity(accumulator2);
+			if (accumulator1 > 0) {
+				_factor1_ += boost::lexical_cast<std::string>(polarity1);
+			} 
+			if (accumulator2 > 0) {
+				_factor2_ += boost::lexical_cast<std::string>(polarity2);
 			}
-			if (polarity2 == 0) {
-				_factor2_ += "0";
-			} else if (polarity2 == 1) {
-				_factor2_ += "1";
-			}
-			accumulator1 = 0;
-			accumulator2 = 0;
-			cout << _factor1_ << endl;
-			cout << _factor2_ << endl;
-			system("a=1;read a");
+			accumulator1 = accumulator2 = 0;
 		} else {
-			accumulator1 += snippet1_size;
-			accumulator2 += snippet2_size;
+			accumulator1 += snippet1.size();
+			accumulator2 += snippet2.size();
 		}
-		//if product of _factor1_ and _factor2_ is num
-		//then exit
 	}
 	std::string factor1_in_decimal = _int_(_factor1_);
 	std::string factor2_in_decimal = _int_(_factor2_);

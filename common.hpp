@@ -103,11 +103,11 @@ std::string _int_(std::string __b) {
 	return _res_;
 }
 
-short int determine_polarity(unsigned long long int x) {
+int determine_polarity(unsigned long long int x) {
 	if (x == 0) {
 		return -1;
 	} else {
-		return x % 2;
+		return (x % 2);
 	}
 	return -1;
 }
