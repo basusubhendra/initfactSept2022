@@ -18,6 +18,9 @@ int main(int argc, char* argv[]) {
 	mpz_set_si(accumulator2, 0);
 	mpz_t rz;
 	mpz_init(rz);
+	mpz_t iter;
+	mpz_init(iter);
+	mpz_set_si(iter, 0);
 	while (1) {
 		mod1->run_micro_step();
 		mod2->run_micro_step();
@@ -36,6 +39,7 @@ int main(int argc, char* argv[]) {
 			if (mpz_cmp_si(accumulator2, 0) > 0) {
 				_factor2_ += boost::lexical_cast<std::string>(polarity2);
 			}
+			gmp_printf("%Zd\n", iter);
 			gmp_printf("%Zd\n", accumulator1);
 			gmp_printf("%Zd\n", accumulator2);
 			mpz_set_si(accumulator1, 0);
@@ -46,6 +50,7 @@ int main(int argc, char* argv[]) {
 			mpz_add_ui(accumulator1, accumulator1, sz1);
 			mpz_add_ui(accumulator2, accumulator2, sz2);
 		}
+		mpz_add_ui(iter, iter, 1);
 	}
 	std::string factor1_in_decimal = _int_(_factor1_);
 	std::string factor2_in_decimal = _int_(_factor2_);
