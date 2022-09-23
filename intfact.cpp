@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
 	mpz_init(rz);
 	mpz_t iter;
 	mpz_init(iter);
-	mpz_set_si(iter, 0);
+	mpz_set_ui(iter, 1);
 	while (1) {
 		mod1->run_micro_step();
 		mod2->run_micro_step();
